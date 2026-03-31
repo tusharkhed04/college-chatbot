@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CollegeBot — AI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <!-- ── AUTH GATE (shown when not logged in) ── -->
+  <div class="auth-gate" id="auth-gate">
+    <div class="gate-bg"></div>
+    <div class="gate-card">
+      <div class="gate-logo">🎓</div>
+      <h1>CollegeBot</h1>
+      <p>Your AI-powered college assistant.<br/>Login or create an account to start chatting.</p>
+
+      <div class="gate-tabs">
+        <button class="gate-tab active" data-tab="login">Login</button>
+        <button class="gate-tab" data-tab="signup">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="gate-form active" id="gate-login">
+        <input type="email" id="g-login-email" placeholder="Email address" />
+        <input type="password" id="g-login-password" placeholder="Password" />
+        <button class="gate-submit" id="g-login-btn">Login →</button>
+        <p class="gate-hint">Demo: demo@college.edu / demo123</p>
+        <div class="gate-error" id="g-login-error"></div>
+      </div>
+
+      <!-- Signup Form -->
+      <div class="gate-form" id="gate-signup">
+        <input type="text" id="g-signup-name" placeholder="Full Name" />
+        <input type="email" id="g-signup-email" placeholder="Email address" />
+        <input type="password" id="g-signup-password" placeholder="Password" />
+        <select id="g-signup-branch">
+          <option value="">Select Branch</option>
+          <option value="CSE">CSE — Computer Science</option>
+          <option value="IT">IT — Information Technology</option>
+          <option value="MECH">Mechanical Engineering</option>
+          <option value="CIVIL">Civil Engineering</option>
+        </select>
+        <select id="g-signup-year">
+          <option value="">Select Year</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+        <button class="gate-submit" id="g-signup-btn">Create Account →</button>
+        <div class="gate-error" id="g-signup-error"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN APP (shown after login) ── -->
+  <div class="app-shell hidden" id="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-mark">CB</div>
+        <div class="logo-text">
+          <span class="logo-title">CollegeBot</span>
+          <span class="logo-sub">AI Assistant</span>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-avatar" id="profile-initials">?</div>
+        <div class="profile-info">
+          <div class="profile-name" id="profile-name">Loading...</div>
+          <div class="profile-meta" id="profile-meta">...</div>
+        </div>
+      </div>
+
+      <nav class="quick-actions">
+        <p class="nav-label">Quick Ask</p>
+        <button class="qa-btn" data-msg="Show today's timetable">📅 Today's Timetable</button>
+        <button class="qa-btn" data-msg="Show my syllabus">📚 My Syllabus</button>
+        <button class="qa-btn" data-msg="List all faculty">👨‍🏫 Faculty List</button>
+        <button class="qa-btn" data-msg="Show exam schedule">📋 Exam Schedule</button>
+        <button class="qa-btn" data-msg="help">❓ Help</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" id="logout-btn">🚪 Logout</button>
+        <a href="/admin" class="admin-link">⚙️ Admin Panel</a>
+      </div>
+    </aside>
+
+    <!-- Chat Main -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+        <div class="header-info">
+          <div class="header-bot-dot"></div>
+          <span>CollegeBot</span>
+          <span class="header-status">Online</span>
+        </div>
+        <div class="header-actions">
+          <div class="context-badge" id="context-badge"></div>
+          <button class="btn-icon" id="clear-btn" title="Clear Chat">🗑️</button>
+        </div>
+      </header>
+
+      <div class="chat-window" id="chat-window">
+        <div class="welcome-splash" id="welcome-splash">
+          <div class="splash-icon">🎓</div>
+          <h2>Welcome to CollegeBot</h2>
+          <p>Ask me about timetables, syllabus, faculty, or exam schedules.</p>
+          <div class="splash-chips">
+            <span class="chip" data-msg="Show today's timetable">Today's Timetable</span>
+            <span class="chip" data-msg="Show syllabus for Year 3">Year 3 Syllabus</span>
+            <span class="chip" data-msg="Who teaches Operating Systems?">Faculty Info</span>
+            <span class="chip" data-msg="When is the mid-term exam?">Exam Dates</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typing-indicator">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="input-row">
+          <input type="text" id="chat-input" placeholder="Ask about timetable, syllabus, faculty…" autocomplete="off" />
+          <button id="send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

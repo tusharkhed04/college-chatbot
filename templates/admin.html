@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CollegeBot — Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/css/admin.css"/>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div class="admin-login" id="admin-login">
+    <div class="login-card">
+      <div class="admin-logo">⚙️</div>
+      <h2>Admin Panel</h2>
+      <p>Enter admin password to continue</p>
+      <input type="password" id="admin-pass" placeholder="Enter password"/>
+      <button id="admin-login-btn">Access Panel</button>
+      <div class="error-msg" id="admin-error"></div>
+      <a href="/" class="back-link">← Back to Chat</a>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin-panel hidden" id="admin-panel">
+    <header class="admin-header">
+      <div class="admin-brand">⚙️ Admin Panel</div>
+      <div class="header-right">
+        <a href="/" class="back-btn">← Back to Chat</a>
+        <button class="logout-btn" id="admin-logout-btn">Logout</button>
+      </div>
+    </header>
+
+    <!-- Year Filter -->
+    <div class="year-filter-bar">
+      <span class="filter-label">Filter by Year:</span>
+      <button class="year-btn active" data-year="0">All Years</button>
+      <button class="year-btn" data-year="1">Year 1</button>
+      <button class="year-btn" data-year="2">Year 2</button>
+      <button class="year-btn" data-year="3">Year 3</button>
+      <button class="year-btn" data-year="4">Year 4</button>
+    </div>
+
+    <!-- Section Tabs -->
+    <div class="section-tabs">
+      <button class="sec-tab active" data-section="timetable">📅 Timetable</button>
+      <button class="sec-tab" data-section="exams">📋 Exam Schedule</button>
+      <button class="sec-tab" data-section="faculty">👨‍🏫 Faculty</button>
+      <button class="sec-tab" data-section="syllabus">📚 Syllabus</button>
+    </div>
+
+    <div class="admin-body">
+
+      <!-- TIMETABLE -->
+      <div class="section active" id="section-timetable">
+        <div class="section-header">
+          <h2>📅 Timetable Management</h2>
+          <button class="btn-add" id="btn-add-timetable">+ Add Entry</button>
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Year</th><th>Branch</th><th>Day</th><th>Time Slot</th><th>Subject</th><th>Room</th><th>Actions</th></tr></thead>
+          <tbody id="timetable-body"></tbody>
+        </table>
+      </div>
+
+      <!-- EXAMS -->
+      <div class="section" id="section-exams">
+        <div class="section-header">
+          <h2>📋 Exam Schedule Management</h2>
+          <button class="btn-add" id="btn-add-exam">+ Add Exam</button>
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Year</th><th>Branch</th><th>Type</th><th>Subject</th><th>Date</th><th>Time</th><th>Room</th><th>Actions</th></tr></thead>
+          <tbody id="exams-body"></tbody>
+        </table>
+      </div>
+
+      <!-- FACULTY -->
+      <div class="section" id="section-faculty">
+        <div class="section-header">
+          <h2>👨‍🏫 Faculty Management</h2>
+          <button class="btn-add" id="btn-add-faculty">+ Add Faculty</button>
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Name</th><th>Department</th><th>Subject</th><th>Email</th><th>Cabin</th><th>Phone</th><th>Actions</th></tr></thead>
+          <tbody id="faculty-body"></tbody>
+        </table>
+      </div>
+
+      <!-- SYLLABUS -->
+      <div class="section" id="section-syllabus">
+        <div class="section-header">
+          <h2>📚 Syllabus Management</h2>
+          <button class="btn-add" id="btn-add-syllabus">+ Add Subject</button>
+        </div>
+        <table class="admin-table">
+          <thead><tr><th>Year</th><th>Sem</th><th>Code</th><th>Subject Name</th><th>Branch</th><th>Credits</th><th>Faculty</th><th>Actions</th></tr></thead>
+          <tbody id="syllabus-body"></tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay hidden" id="modal-overlay">
+    <div class="modal-box" id="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Entry</h3>
+        <button class="modal-close" id="modal-close-btn">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="modal-cancel-btn">Cancel</button>
+        <button class="btn-save" id="modal-save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>
